@@ -1,8 +1,12 @@
-FROM openjdk:8-jre-alpine
-MAINTAINER Benjamin Muschko "benjamin.muschko@gmail.com"
-COPY account-web-service-1.0.0.war /app/account-web-service.war
-ENTRYPOINT ["java"]
-CMD ["-jar", "/app/account-web-service.war"]
+# Build stage
+FROM gradle:7.6-jdk17 AS build
+WORKDIR /app
+COPY . /app/
+RUN gradle build
+
+# Package stage
+FROM openjdk:17-alpine
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar /app/app.jar
 EXPOSE 8080
-RUN apk --update --no-cache add curl
-#HEALTHCHECK CMD curl -f http://localhost:8080/health || exit 1
+ENTRYPOINT ["java","-jar","app.jar"]

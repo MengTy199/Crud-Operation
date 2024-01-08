@@ -1,0 +1,31 @@
+
+server:
+  port: 5432
+#  servlet:
+#    context-path: /v1
+
+spring:
+  application:
+    title: Learn Spring Boot
+    version: v3.0.4
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://dpg-cmdnb4ed3nmc73dld0l0-a.singapore-postgres.render.com:5432/crud
+    username: crud
+    password: izwIarNejHBI30I5tARBFnqnLXSneQ2g
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    show-sql: true
+
+springdoc:
+  api-docs:
+    enabled: true #enabled page
+    path: /hello.html
+
+
+
